@@ -12,13 +12,14 @@ void uart_init() {
         | USART_CHSIZE_8BIT_gc;
     USART0.CTRLB =
         USART_TXEN_bm
+        | USART_RXEN_bm
         | USART_RXMODE_NORMAL_gc
         ;
 }
 
 int main (void)
 {
-    // Use alternate pins (TX on PA1)
+    // Use alternate pins (TX on PA1, RX on PA2)
     PORTMUX_CTRLB |= PORTMUX_USART0_bm;
 
     PORTA.DIRSET |= 2;
@@ -36,9 +37,16 @@ int main (void)
 
         ++count;
 
-        if (count > 'z') {
+        if (USART0.STATUS & USART_RXCIF_bm) {
+            unsigned char c = USART0.RXDATAL;
+
+            if ('a' <= c && c <= 'z') {
+                count = c;
+            }
+        } else if (count > 'z') {
             count = 'a';
         }
+
     }
         
     
