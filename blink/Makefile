@@ -1,6 +1,5 @@
-COMPILE_OPTS=-mmcu=attiny412 -c -g -Os -Wall -Wstrict-prototypes -std=gnu99 -DF_CPU=3333333UL
-
-LINK_OPTS=-mmcu=attiny412 -g -Os -Wall -Wstrict-prototypes -std=gnu99 -DF_CPU=$speed
+COMPILE_OPTS=-mmcu=attiny412 -c -g -Os -Wall -DF_CPU=3333333UL
+LINK_OPTS=-mmcu=attiny412 -g -Os -Wall
 
 CC="avr-gcc"
 
@@ -12,17 +11,8 @@ program:
 clean:
 	rm -Rf build/*
 
-# For producing assembly output
-# build/assembly.S:
-# 	$(CC) $(COMPILE_OPTS) -S -obuild/assembly.S main.c uart.c
-
 build/%.o: %.c
 	$(CC) $(COMPILE_OPTS) -c -o$@ $<
 
 build/prog.elf: build/main.o
 	$(CC) $(LINK_OPTS) -o$@ $^
-
-
-
-
-# --memorysummary dist/default/production/memoryfile.xml ??
