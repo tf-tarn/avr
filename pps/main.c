@@ -33,7 +33,7 @@ void timer_a_init() {
     TCA0.SINGLE.CTRLA |= 1;
 }
 
-char send = 0;
+volatile char send = 0;
 
 int main (void)
 {
