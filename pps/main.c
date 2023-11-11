@@ -28,7 +28,6 @@ void timer_a_init() {
     // enable OVF, CMP0 interrupts
     TCA0.SINGLE.INTCTRL |= (1 << 0) | (1 << 4);
 
-
     // enable
     TCA0.SINGLE.CTRLA |= 1;
 }
@@ -55,9 +54,7 @@ int main (void)
             send = 0;
         }
     }
-        
-    
-    
+
     return 0;
 
 }
