@@ -1,3 +1,4 @@
+#include <avr/wdt.h>
 #include <avr/interrupt.h>
 #include <avr/io.h>
 #include <util/delay.h>
@@ -47,6 +48,10 @@ void adc_init() {
     ADC0.CTRLA |= 1;
 }
 
+void init_wdt() {
+    _PROTECTED_WRITE(WDT.CTRLA, WDT_PERIOD_1KCLK_gc);
+}
+
 volatile unsigned char send = 0;
 volatile unsigned char adc_result_available = 0;
 volatile uint16_t adc_result = 0;
@@ -55,6 +60,9 @@ const char *hex_digits = "0123456789abcdef";
 
 int main (void)
 {
+
+    init_wdt();
+
     // Use alternate pins (TX on PA1, RX on PA2)
     PORTMUX_CTRLB |= PORTMUX_USART0_bm;
 
@@ -93,6 +101,8 @@ int main (void)
             USART0.TXDATAL = '\n';
             adc_result_available = 0;
         }
+
+        wdt_reset();
     }
 
     return 0;
