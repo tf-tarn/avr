@@ -5,7 +5,7 @@ CC="avr-gcc"
 
 all: build/prog.elf
 
-program:
+program: build/prog.elf
 	avrdude -C ~/projects/jtag2updi/avrdude.conf -c jtag2updi -P /dev/ttyUSB0 -p t412 -U "flash:w:build/prog.elf:e"
 
 clean:
