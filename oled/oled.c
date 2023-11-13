@@ -2,9 +2,9 @@
 #include "spi.h"
 #include "oled.h"
 
-#define COMMAND_MODE() PORTA.OUTCLR = (1 << 2)
+#define COMMAND_MODE() PORTA.OUTCLR = (1 << 7)
 /* PORTCbits.RC3 = 0; // command mode */
-#define DATA_MODE() PORTA.OUTSET = (1 << 2)
+#define DATA_MODE() PORTA.OUTSET = (1 << 7)
 /* PORTCbits.RC3 = 1; // data mode */
 
 

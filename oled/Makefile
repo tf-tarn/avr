@@ -5,4 +5,12 @@ CC=avr-gcc
 
 OBJECTS=terminal.o oled.o font.o spi.o uart.o main.o
 
+ADDITIONAL_TARGETS=build/rawimage2oled build/bowman.oled
+
 include ../common.mk
+
+build/rawimage2oled: rawimage2oled.c
+	gcc -g -Wall -o$@ $^
+
+build/bowman.oled: bowman.data build/rawimage2oled
+	build/rawimage2oled < $^ > $@

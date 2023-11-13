@@ -1,8 +1,9 @@
-all: build/prog.elf
+all: build/prog.elf $(ADDITIONAL_TARGETS)
 
 program: build/prog.elf
 	avrdude -C ~/projects/jtag2updi/avrdude.conf -c jtag2updi -P /dev/ttyUSB0 -p t412 -U "flash:w:build/prog.elf:e"
 
+.PHONY: clean
 clean:
 	rm -Rf build/*
 

@@ -52,9 +52,14 @@
 #define SSD1306_VERTICAL_AND_RIGHT_HORIZONTAL_SCROLL 0x29
 #define SSD1306_VERTICAL_AND_LEFT_HORIZONTAL_SCROLL  0x2A
 
+////////////////////////////////////////////////////////////////////////////////
+#define SCREENWIDTH 127
+#define SCREENHEIGHT 64
 
 void oled_command(unsigned char c);
 void oled_data(unsigned char c);
 void oled_init();
 void oled_spi_init();
 void oled_clear();
+
+

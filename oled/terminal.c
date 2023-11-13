@@ -3,9 +3,6 @@
 #include "oled.h"
 #include "uart.h"
 
-#define SCREENWIDTH 127
-#define SCREENHEIGHT 64
-
 #define FONTWIDTH 6
 #define FONTHEIGHT 8
 

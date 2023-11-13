@@ -2,9 +2,11 @@
 
 #define BAUD_RATE(R) (uint16_t)((float)(F_CPU * 64 / (16 * (float)(R))) + 0.5)
 
-void uart_init() {
-    cli();
+void uart_init(char async_receive) {
     USART0.BAUD = BAUD_RATE(9600);
+    if (async_receive) {
+        USART0.CTRLA = USART_RXCIE_bm;
+    }
     USART0.CTRLC =
         USART_CMODE_ASYNCHRONOUS_gc
         | USART_PMODE_DISABLED_gc
@@ -15,7 +17,6 @@ void uart_init() {
         | USART_RXEN_bm
         | USART_RXMODE_NORMAL_gc
         ;
-    sei();
 }
 
 void uart_write(char c) {
