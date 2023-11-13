@@ -58,7 +58,7 @@ static void newline() {
 static void return_carriage() {
     oled_command(0x21); // set column address
     oled_command(0);
-    oled_command(127);
+    oled_command(SCREENWIDTH - 1);
 }
 
 void term_write(unsigned char c) {
@@ -126,7 +126,7 @@ void term_clear() {
     oled_command(7);
     oled_command(0x21); // set column address
     oled_command(0);
-    oled_command(127);
+    oled_command(SCREENWIDTH-1);
 
     oled_clear();
 

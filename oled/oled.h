@@ -53,7 +53,7 @@
 #define SSD1306_VERTICAL_AND_LEFT_HORIZONTAL_SCROLL  0x2A
 
 ////////////////////////////////////////////////////////////////////////////////
-#define SCREENWIDTH 127
+#define SCREENWIDTH 128
 #define SCREENHEIGHT 64
 
 void oled_command(unsigned char c);

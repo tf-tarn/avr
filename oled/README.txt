@@ -2,8 +2,9 @@
     make all
 
 will build the firmware, a utility program for converting raw images
-to a formwat suitable for the OLED, and it will also use the utility
-to convert an included sample image. Images in this format must be
-written to the device slowly, via e.g.:
+(one byte per pixel; zero is assumed to be black, all other values are
+mapped to white) to a format suitable for the OLED, and it will also
+use the utility to convert an included sample image. You can simply
+cat the resulting image to the device, e.g.:
 
-    pv -q -L 64 < build/bowman.oled > /dev/ttyUSB1
+    cat build/bowman.oled > /dev/ttyUSB1

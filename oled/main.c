@@ -6,10 +6,10 @@
 #include "oled.h"
 #include "terminal.h"
 
-#define RXBUFLEN (1 << 7)
+#define RXBUFLEN (1 << 4)
 #define RXBUFLEN_MASK (RXBUFLEN - 1)
 
-char rxbuf[RXBUFLEN];
+volatile char rxbuf[RXBUFLEN];
 volatile unsigned char rxbuf_start = 0;
 volatile unsigned char rxbuf_end = 0;
 
@@ -32,7 +32,7 @@ static void set_row(uint8_t r) {
 static void return_carriage() {
     oled_command(0x21); // set column address
     oled_command(0);
-    oled_command(127);
+    oled_command(SCREENWIDTH - 1);
 }
 
 void gfx_begin() {
@@ -43,8 +43,8 @@ void gfx_begin() {
 }
 
 char gfx_draw(uint8_t c) {
-    if (gfx.col >= SCREENWIDTH) {
-        gfx.col = 0;
+    if (gfx.col > SCREENWIDTH - 1) {
+        gfx.col = 1;
         ++gfx.row;
         if (gfx.row >= SCREENHEIGHT / 8) {
             // graphics drawing has finished
@@ -55,7 +55,9 @@ char gfx_draw(uint8_t c) {
     } else {
         ++gfx.col;
     }
+
     oled_data(c);
+
     return 0;
 }
 
@@ -77,22 +79,18 @@ int main (void)
 
     uart_init();
 
-    _delay_ms(500);
+    _delay_ms(100);
     PORTA.OUTCLR = (1 << 0);
-    _delay_ms(500);
+    _delay_ms(100);
     PORTA.OUTSET = (1 << 0);
 
     oled_init();
     term_clear();
     sei();
 
-    /* term_write('H'); */
-    /* term_write('e'); */
-    /* term_write('l'); */
-    /* term_write('l'); */
-    /* term_write('o'); */
-    /* term_write('\r'); */
-    /* term_write('\n'); */
+    _delay_ms(100);
+    term_write_s("Hello\r\nReady to receive\r\ngraphics data.");
+    gfx_begin();
 
     unsigned char c = 'U';
     while (1) {
@@ -125,7 +123,7 @@ int main (void)
                 mode = M_TEXT;
             }
         }
-        _delay_ms(10);
+        _delay_us(300);
     }
     return 0;
 

@@ -13,4 +13,4 @@ build/rawimage2oled: rawimage2oled.c
 	gcc -g -Wall -o$@ $^
 
 build/bowman.oled: bowman.data build/rawimage2oled
-	build/rawimage2oled < $^ > $@
+	build/rawimage2oled < $< > $@
