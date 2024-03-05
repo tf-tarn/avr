@@ -7,7 +7,10 @@ adc/               reading the ADC
 blink/             just blink an LED
 oled/              small program that can display text and graphics on
                    an OLED display
-pcb-devboard/      a small dev/breakout board for the ATtiny412,
+pcb-devboard-412/  a small dev/breakout board for the ATtiny412,
+                   implemented in kicad, with JLCPCB part numbers
+                   for PCBA
+pcb-devboard-416/  a pair of small dev/breakout boards for the ATtiny416,
                    implemented in kicad, with JLCPCB part numbers
                    for PCBA
 pps/               an exercise in using timer interrupts
