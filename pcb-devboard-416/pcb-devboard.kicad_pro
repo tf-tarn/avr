@@ -379,7 +379,6 @@
         "microvia_drill": 0.1,
         "name": "thicc",
         "nets": [
-          "/VBUS",
           "GND",
           "VSYS"
         ],
